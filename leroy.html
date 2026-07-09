@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leroy - Your Video System</title>
+<style>
+  :root{--bg:#0a0a0a;--card:#141414;--border:#262626;--gold:#d4af37;--gold-hi:#f0dc9a;--gold-dim:#8a7223;--text:#e8e6e1;--dim:#9a978f;--green:#57c78a;--blue:#5b9bd5;--purple:#b18cd9;--mono:"SF Mono",ui-monospace,Menlo,monospace;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,"SF Pro Text","Helvetica Neue",sans-serif;line-height:1.72;padding:44px 22px 90px;}
+  .wrap{max-width:820px;margin:0 auto;}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;}
+  h1{font-size:31px;font-weight:800;margin:10px 0 6px;}
+  .meta{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:1px;margin-bottom:22px;}
+  .lead{font-size:16.5px;background:linear-gradient(135deg,#16130a,#141414);border:1px solid var(--gold-dim);border-radius:14px;padding:22px 26px;margin-bottom:14px;}
+  .num{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase;margin-top:44px;}
+  h2{font-family:var(--mono);font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:6px 0 14px;display:flex;align-items:center;gap:14px;}
+  h2::after{content:"";flex:1;height:1px;background:var(--border);}
+  h3{font-size:16px;color:var(--gold-hi);margin:18px 0 6px;}
+  p{font-size:15.5px;margin-bottom:12px;} .dim{color:var(--dim);} b{color:#fff;}
+  ul{list-style:none;} ul li{padding:8px 0 8px 24px;position:relative;font-size:15px;border-bottom:1px solid #171717;}
+  ul li:last-child{border-bottom:none;} ul li::before{content:"\2713";color:var(--gold);position:absolute;left:0;font-weight:700;} ul li b{color:#fff;}
+  ol.flow{counter-reset:s;list-style:none;} ol.flow li{padding:9px 0 9px 40px;position:relative;counter-increment:s;border-bottom:1px solid #1a1a1a;font-size:15px;}
+  ol.flow li::before{content:counter(s);position:absolute;left:0;top:9px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#0a0a0a;font-weight:800;font-size:13px;display:grid;place-items:center;font-family:var(--mono);}
+  .bigidea{background:linear-gradient(135deg,#12100a,#141414);border:1px solid var(--gold);border-radius:14px;padding:20px 26px;margin:16px 0;}
+  .bigidea .lbl{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+  .bigidea .q{font-size:21px;font-weight:800;color:var(--gold-hi);margin:6px 0 4px;line-height:1.35;}
+  .note{background:#0d0c08;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:14px 18px;margin:14px 0;font-size:15px;color:var(--gold-hi);}
+  .note b{color:#fff;}
+  .tier{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin:12px 0;}
+  .tier .th{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:4px;}
+  .tier .tn{font-size:18px;font-weight:800;color:#fff;}
+  .tier .tp{font-family:var(--mono);font-size:13px;color:var(--gold-hi);white-space:nowrap;}
+  .tier.free{border-color:#3a3a3a;} .tier.t20{border-color:var(--green);} .tier.t40{border-color:var(--gold);} .tier.tmax{border-color:var(--purple);}
+  .tier .can{color:var(--green);font-size:14px;margin:6px 0 2px;} .tier .cant{color:#c98a8a;font-size:14px;}
+  .tier .can b,.tier .cant b{color:#fff;}
+  .meta2{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--dim);text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Built by Malik &middot; For Leroy (drunk4loko)</div>
+  <h1>Your Video System: What You're Getting</h1>
+  <div class="meta">your own AI video machine &middot; I build and run it for you, free</div>
+
+  <div class="lead">
+    Leroy, this is your own video machine. You type a story, check the prompts, and it builds you a finished vertical video in your exact style, dark glowing-eyes comic, your characters, captions, and voiceover, ready to post. <b>I'm building it and keeping it running for you for free. I'm not taking a dime off this, ever.</b> This is for you. The only money involved is what YOU put into the AI tools that actually create the videos, and that money goes straight to those tools, not to me.
+  </div>
+
+  <div class="bigidea">
+    <div class="lbl">The one thing to understand</div>
+    <div class="q">Your system is only as strong as the tools you fund. The monthly money isn't paying me, it's fueling the AI engines that draw and animate your videos. More fuel, better videos. Less fuel, simpler videos.</div>
+  </div>
+
+  <!-- 1 -->
+  <div class="num">Part 1</div>
+  <h2>How to think about it</h2>
+  <p>The machine I built is the same at every level. What changes is the <b>tools you plug into it</b>, the AI engines that make the images and the motion. Those engines cost money to run, and that's the part you fund on your own account. Think of it like a car I'm giving you for free: it's a great car, but how far and how fast it goes depends on how much gas you put in.</p>
+  <div class="note"><b>Straight up:</b> you told me you want to keep it around $20 a month, and that's totally cool. I just want you to see clearly what $20 makes versus what $40 or more makes, so when you want a certain kind of video, you know what it takes to get there. You pick the level. I build it either way.</div>
+
+  <!-- 2 -->
+  <div class="num">Part 2</div>
+  <h2>The tiers, and what each one makes</h2>
+  <p class="meta2">The number is YOUR monthly spend on the AI tools, on your own account. $0 to me at every level.</p>
+
+  <div class="tier free">
+    <div class="th"><span class="tn">Free</span><span class="tp">$0 / month</span></div>
+    <div class="can"><b>Can do:</b> let you test the system and see it work, using the free AI tiers.</div>
+    <div class="cant"><b>Can't do:</b> real posting quality. Free tools are slow, capped, lower quality, and sometimes watermarked. Good for a taste, not for a channel.</div>
+  </div>
+
+  <div class="tier t20">
+    <div class="th"><span class="tn">The $20 tier</span><span class="tp">~$20 / month</span></div>
+    <div class="can"><b>Can do:</b> your real videos, the ones you make now. Full comic-style stills in your locked look (glowing eyes, your character), voiceover, bold captions, and cinematic camera moves (zooms, pans, punch-ins). Enough to post <b>daily</b>. This is exactly what you asked for, and it's legit.</div>
+    <div class="cant"><b>Can't do:</b> real animation. It's a "living picture book", the camera moves over your images, but the characters themselves don't move. If you want stuff that actually animates, that's the next tier.</div>
+  </div>
+
+  <div class="tier t40">
+    <div class="th"><span class="tn">The $40 tier</span><span class="tp">~$40 / month</span></div>
+    <div class="can"><b>Can do:</b> everything in the $20 tier, PLUS <b>real animation</b>. Your characters and scenes actually move, motion, not just camera pans. This is the tier for when you want the videos to feel animated and next-level, the "stuff you might want us to make."</div>
+    <div class="cant"><b>Trade-off:</b> animation engines cost more per video, so this is where the budget steps up. Worth it when a story needs real movement.</div>
+  </div>
+
+  <div class="tier tmax">
+    <div class="th"><span class="tn">The premium tier</span><span class="tp">~$75-150+ / month</span></div>
+    <div class="can"><b>Can do:</b> the best of everything, more animation across the whole video, higher resolution, longer videos, more videos per day, and the top AI engines. Max quality when you're scaling the channel up.</div>
+    <div class="cant"><b>For:</b> when the channel is growing and you want it to look like a studio made it.</div>
+  </div>
+
+  <div class="bigidea">
+    <div class="lbl">Say it plain</div>
+    <div class="q">$20 gets your stills videos, no problem. $40 gets you the animations. The more you fund the tools, the better it looks. That's the only knob, and it's yours to turn whenever you want.</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="num">Part 3</div>
+  <h2>What you get at every tier (the machine itself, free from me)</h2>
+  <ul>
+    <li><b>Prompt approval before anything is drawn.</b> It shows you the scene prompts first, you okay or change them, then it generates. No wasted images.</li>
+    <li><b>Your style locked in.</b> Dark comic, glowing eyes, gritty, serious. No bright, no cute, no goofy.</li>
+    <li><b>Consistent characters</b> across the whole video.</li>
+    <li><b>Style can flex</b> when you want, match a reference photo or switch a look for one video, then back to default.</li>
+    <li><b>Runs on your own Windows laptop and your own accounts</b>, so it's yours and private.</li>
+    <li><b>Posting stays your call.</b> It makes the video, you tap post.</li>
+  </ul>
+
+  <!-- 4 -->
+  <div class="num">Part 4</div>
+  <h2>How you'll use it</h2>
+  <ol class="flow">
+    <li><b>Type your story idea.</b></li>
+    <li><b>Review the beats and prompts</b>, tweak anything.</li>
+    <li><b>Hit approve</b>, it builds the images, voice, captions, and motion.</li>
+    <li><b>Get your finished vertical video</b>, then you post it.</li>
+  </ol>
+
+  <!-- 5 -->
+  <div class="num">Part 5</div>
+  <h2>What I still need from you</h2>
+  <div class="note">
+    Send me your <b>3 to 5 best videos</b>, the ones that feel the most "you", and point out any bits that feel goofy so I make sure to avoid them. That's the last piece to lock your exact look before I hand it over.
+  </div>
+
+  <p style="margin-top:22px"><b>- Malik</b></p>
+  <div class="meta" style="margin-top:20px">Your system, your machine, your accounts. Built and run for you, free. You only fund the tools, and that decides the quality.</div>
+</div>
+</body>
+</html>

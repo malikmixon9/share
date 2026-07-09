@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tool Stack Upgrade - Firecrawl, Higgsfield, Supabase, Claude Design</title>
+<style>
+  :root{--bg:#0a0a0a;--card:#141414;--border:#262626;--gold:#d4af37;--gold-hi:#f0dc9a;--gold-dim:#8a7223;--text:#e8e6e1;--dim:#9a978f;--green:#57c78a;--blue:#5b9bd5;--purple:#b18cd9;--orange:#e0913a;--mono:"SF Mono",ui-monospace,Menlo,monospace;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,"SF Pro Text","Helvetica Neue",sans-serif;line-height:1.7;padding:44px 22px 90px;}
+  .wrap{max-width:880px;margin:0 auto;}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;}
+  h1{font-size:30px;font-weight:800;margin:10px 0 6px;text-wrap:balance;}
+  .meta{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:1px;margin-bottom:22px;}
+  .lead{font-size:16px;background:linear-gradient(135deg,#16130a,#141414);border:1px solid var(--gold-dim);border-radius:14px;padding:20px 24px;margin-bottom:14px;}
+  h2{font-family:var(--mono);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:40px 0 14px;display:flex;align-items:center;gap:14px;}
+  h2::after{content:"";flex:1;height:1px;background:var(--border);}
+  h3{font-size:16px;color:var(--gold-hi);margin:16px 0 6px;}
+  p{font-size:15px;margin-bottom:11px;} .dim{color:var(--dim);} b{color:#fff;}
+  ul{list-style:none;} ul li{padding:6px 0 6px 22px;position:relative;font-size:14.5px;}
+  ul li::before{content:"\25B8";color:var(--gold);position:absolute;left:0;} ul li b{color:#fff;}
+  code{font-family:var(--mono);font-size:13px;background:#1c1c1c;border:1px solid var(--border);border-radius:5px;padding:2px 6px;color:var(--gold-hi);}
+  .cmd{display:block;font-family:var(--mono);font-size:12.5px;background:#0f0f0f;border:1px solid var(--border);border-radius:8px;padding:11px 14px;margin:7px 0;color:var(--green);overflow-x:auto;white-space:pre;}
+  .tool{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin:16px 0;}
+  .tool.fc{border-left:4px solid var(--orange);}
+  .tool.hg{border-left:4px solid var(--purple);}
+  .tool.sb{border-left:4px solid var(--green);}
+  .tool.cd{border-left:4px solid var(--blue);}
+  .tool .th{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;}
+  .tool .tn{font-size:20px;font-weight:800;color:#fff;}
+  .tool .tw{font-family:var(--mono);font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;}
+  .row{display:grid;grid-template-columns:130px 1fr;gap:2px 16px;margin:10px 0;}
+  .row .rk{font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;padding-top:8px;}
+  .row .rv{border-bottom:1px solid #1a1a1a;padding:7px 0;font-size:14.5px;}
+  .row .rv:last-child{border-bottom:none;}
+  .connect{background:#0d0c08;border:1px solid var(--gold-dim);border-radius:10px;padding:12px 16px;margin:10px 0;}
+  .connect .cl{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;}
+  .youdo{background:#0b0f0d;border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;margin:10px 0;font-size:14px;}
+  .youdo b{color:var(--green);}
+  .verdict{background:#0d0c08;border:1px solid var(--gold);border-radius:12px;padding:18px 24px;margin:14px 0;}
+  .verdict .big{font-size:18px;font-weight:800;color:var(--gold-hi);margin-bottom:6px;}
+  .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:1px;padding:2px 7px;border-radius:4px;background:#2a2410;color:var(--gold-hi);margin-left:6px;}
+  ol.pri{counter-reset:s;list-style:none;} ol.pri li{padding:9px 0 9px 40px;position:relative;counter-increment:s;border-bottom:1px solid #1a1a1a;font-size:15px;}
+  ol.pri li::before{content:counter(s);position:absolute;left:0;top:9px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#0a0a0a;font-weight:800;font-size:13px;display:grid;place-items:center;font-family:var(--mono);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Mixon Grows &middot; Internal &middot; Tooling</div>
+  <h1>Tool Stack Upgrade: Four Tools That Make Us Faster and Richer</h1>
+  <div class="meta">researched live 2026-07-09 &middot; all four connect to Claude (Dexter) and Codex (Kamina)</div>
+
+  <div class="lead">
+    Good news across the board: <b>every one of these plugs directly into Dexter and Kamina</b> so we work with them in-session instead of you doing it by hand. Three are MCP connectors (Firecrawl, Higgsfield, Supabase) and one is a design surface that hands its work straight to Claude Code (Claude Design). Below is what each does, exactly how it makes us money, how it connects, and the one thing only you can do (sign up / authorize your own account, since I can't create accounts or hold your keys).
+  </div>
+
+  <!-- SUPABASE -->
+  <div class="tool sb">
+    <div class="th"><span class="tn">Supabase</span><span class="tw">real backend &middot; MCP connector</span></div>
+    <div class="row">
+      <div class="rk">What it is</div><div class="rv">A real online database with logins, file storage, and security. It is the "back office" that makes an app a real product instead of a demo.</div>
+      <div class="rk">The money</div><div class="rv"><b>This is what lets us sell real apps.</b> Terri's $22.5k system, Stan's portal, any client app, they all need real data that saves, real logins, and secure PII. Supabase is that. It turns our prototypes into products we can actually charge full price for and hand over.</div>
+      <div class="rk">In practice</div><div class="rv">Dexter and Kamina can build the database, add logins, and query the data directly while building the app. No more fake demo data, real client records, safely stored.</div>
+    </div>
+    <div class="connect"><span class="cl">Connect to Claude Code</span>
+      <span class="cmd">claude mcp add --transport http supabase https://mcp.supabase.com/mcp</span>
+      <span class="dim" style="font-size:13px">First use opens a browser to log into your Supabase and authorize. Same server goes into Kamina's config too.</span>
+    </div>
+    <div class="youdo"><b>You do once:</b> make a free Supabase account at supabase.com, then click authorize when the browser opens. That is it. <span class="tag">free tier is plenty to start</span></div>
+  </div>
+
+  <!-- HIGGSFIELD -->
+  <div class="tool hg">
+    <div class="th"><span class="tn">Higgsfield</span><span class="tw">AI video + animation &middot; MCP connector</span></div>
+    <div class="row">
+      <div class="rk">What it is</div><div class="rv">One doorway to the best AI video and image models (Sora, Kling, Veo, Seedance, Soul, Cinema Studio). Real motion and animation from a prompt or an image.</div>
+      <div class="rk">The money</div><div class="rv"><b>This is the video upgrade we kept putting off.</b> It IS Leroy's $40 animation tier, the pastlife.era anime motion factory, and real moving content for Stan and any client. Higher-quality videos = more views = more paying clients and higher tiers.</div>
+      <div class="rk">In practice</div><div class="rv">Dexter or Kamina generates real animated clips in-session and drops them into the video pipeline. Characters and scenes that actually move, not just camera pans.</div>
+    </div>
+    <div class="connect"><span class="cl">Connect to Claude Code</span>
+      <span class="cmd">claude mcp add --transport http higgsfield https://mcp.higgsfield.ai/mcp</span>
+      <span class="dim" style="font-size:13px">Hosted server, authorizes through your Higgsfield account in the browser, uses your existing plan credits. No key to manage.</span>
+    </div>
+    <div class="youdo"><b>You do once:</b> have a Higgsfield account with credits, then authorize in the browser. Your credits carry over. <span class="tag">credit-based, pay for what you generate</span></div>
+  </div>
+
+  <!-- FIRECRAWL -->
+  <div class="tool fc">
+    <div class="th"><span class="tn">Firecrawl</span><span class="tw">web research + scraping &middot; MCP connector</span></div>
+    <div class="row">
+      <div class="rk">What it is</div><div class="rv">Turns any website or web search into clean data the AI can read instantly. Search the web, then pull a page down as tidy text.</div>
+      <div class="rk">The money</div><div class="rv"><b>This powers our sales research.</b> The lead boards, the growth audits, the pre-call briefs, the deep dives, all of it gets faster and sharper when Dexter can pull real live business data in seconds instead of me piecing it together. More briefs, more outreach, more clients.</div>
+      <div class="rk">In practice</div><div class="rv">Dexter finds real local businesses, reads their sites, and builds a lead list or an audit live, on his own.</div>
+    </div>
+    <div class="connect"><span class="cl">Connect to Claude Code</span>
+      <span class="cmd">claude mcp add firecrawl -e FIRECRAWL_API_KEY=YOUR_KEY -- npx -y firecrawl-mcp</span>
+      <span class="dim" style="font-size:13px">This one uses an API key. You get it, I wire it in (or you paste it into the command).</span>
+    </div>
+    <div class="youdo"><b>You do once:</b> sign up at firecrawl.dev and copy your API key. <span class="tag">free tier: light daily use, no card needed</span></div>
+  </div>
+
+  <!-- CLAUDE DESIGN -->
+  <div class="tool cd">
+    <div class="th"><span class="tn">Claude Design</span><span class="tw">visual design &middot; hands off to Claude Code</span></div>
+    <div class="row">
+      <div class="rk">What it is</div><div class="rv">Anthropic's own design tool (you already have it on your plan). You design polished web pages, app screens, slides, and one-pagers visually, then it <b>hands the design straight to Claude Code to build for real</b>, no screenshot, no rebuild.</div>
+      <div class="rk">The money</div><div class="rv"><b>This is our design front door.</b> Mixon Grows websites, client app screens, branded quotes and audits, all designed fast and clean, then built by Dexter. It also learns our black-and-gold brand as a saved design system so everything looks consistent. Faster, better-looking deliverables = premium prices.</div>
+      <div class="rk">In practice</div><div class="rv">Design the look in Claude Design, import our brand, export to HTML or hand to Claude Code to ship. It reads a codebase and can pull our existing style in.</div>
+    </div>
+    <div class="connect"><span class="cl">How it connects</span>
+      <span class="dim" style="font-size:13.5px;display:block;padding:2px 0">Not a plugin, it is a surface on claude.ai. It connects by handing designs to Claude Code natively. Use it at claude.ai, then Dexter picks up exactly where you left off.</span>
+    </div>
+    <div class="youdo"><b>You do:</b> nothing to install, it is on your Claude plan already (research preview). Just start using it for the next site or app screen. <span class="tag">already available to you</span></div>
+  </div>
+
+  <!-- PRIORITY -->
+  <h2>What to set up first (my call)</h2>
+  <div class="verdict">
+    <div class="big">Do them in this order. The first two directly unlock money we are already chasing; the third makes our sales engine faster; the fourth you can use tonight.</div>
+  </div>
+  <ol class="pri">
+    <li><b>Supabase</b> first. It is the difference between selling a demo and selling a real app. Terri's build alone justifies it. Free to start.</li>
+    <li><b>Higgsfield</b> second. It is the animation upgrade for Leroy and pastlife that we have been deferring. Instant quality jump on the video side.</li>
+    <li><b>Firecrawl</b> third. Speeds up every lead board, audit, and brief. Free tier gets us going.</li>
+    <li><b>Claude Design</b> now. Nothing to install, start using it on the next website or app screen and let it hand off to Dexter.</li>
+  </ol>
+
+  <!-- WHAT I NEED -->
+  <h2>The one honest catch</h2>
+  <p>I can wire all the connections and test them, but each one needs <b>your account or key once</b>, because I cannot create accounts or hold your credentials. That is the only manual step, and it is a few minutes per tool:</p>
+  <ul>
+    <li><b>Supabase:</b> make a free account, click authorize.</li>
+    <li><b>Higgsfield:</b> authorize your existing account in the browser.</li>
+    <li><b>Firecrawl:</b> grab your API key from firecrawl.dev.</li>
+    <li><b>Claude Design:</b> nothing, already on your plan.</li>
+  </ul>
+  <p class="dim">Once you have those, I run the setup for both Dexter and Kamina and confirm each one works. After that first authorization, it is all automatic and I use them without you lifting a finger.</p>
+
+  <div class="meta" style="margin-top:34px">Sources: firecrawl.dev, higgsfield.ai/mcp, supabase.com/docs, anthropic.com Claude Design. Setup commands are for Claude Code; the same servers wire into Codex via its config. Costs are each tool's own pricing, confirm current plans when you sign up.</div>
+</div>
+</body>
+</html>

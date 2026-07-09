@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terri Brinston - Author Exposure Dashboard</title>
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg:#0a0a0a; --panel:#141414; --panel2:#171717; --ink:#e8e6e1; --muted:#9a978f;
+      --line:#262626; --line2:#1d1d1d;
+      --gold:#d4af37; --gold-hi:#f0dc9a; --gold-dim:#8a7223;
+      --green:#57c78a; --teal:#2a9d8f; --blue:#5b9bd5; --purple:#b18cd9; --rose:#e0778f;
+      --mono:"SF Mono",ui-monospace,Menlo,monospace;
+      --shadow:0 20px 50px rgba(0,0,0,0.45);
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;min-height:100vh;background:
+      radial-gradient(1100px 500px at 80% -10%, rgba(212,175,55,0.06), transparent 60%),
+      var(--bg);
+      color:var(--ink);font-family:-apple-system,"SF Pro Text",Inter,system-ui,"Segoe UI",sans-serif;overflow-x:hidden;}
+    .shell{width:min(1320px,calc(100% - 40px));margin:0 auto;padding:26px 0 40px;}
+
+    /* top bar */
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:24px;flex-wrap:wrap;}
+    .brand{font-size:20px;font-weight:800;letter-spacing:-0.2px;}
+    .brand span{color:var(--gold);}
+    .brand small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:2.5px;color:var(--muted);text-transform:uppercase;font-weight:400;margin-top:3px;}
+    .live{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--green);text-transform:uppercase;border:1px solid #1e3a2e;background:#0c1712;border-radius:999px;padding:6px 12px;}
+    .live i{width:7px;height:7px;border-radius:999px;background:var(--green);box-shadow:0 0 8px var(--green);}
+
+    header{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:22px;flex-wrap:wrap;}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 11px;border:1px solid var(--gold-dim);border-radius:999px;background:#16130a;color:var(--gold-hi);font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+    h1{margin:12px 0 8px;font-size:clamp(28px,3.4vw,40px);line-height:1.05;font-weight:800;max-width:720px;}
+    .lede{margin:0;max-width:640px;color:var(--muted);font-size:15px;line-height:1.55;}
+    .period{min-width:210px;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:15px 18px;}
+    .period strong{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+    .period span{display:block;font-size:22px;font-weight:800;}
+    .period p{margin:6px 0 0;font-size:11.5px;color:var(--muted);line-height:1.4;}
+
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px;min-width:0;}
+
+    .metric{grid-column:span 3;}
+    .metric .label{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;}
+    .metric .value{margin-top:18px;font-size:clamp(30px,3.4vw,42px);font-weight:800;line-height:0.95;color:#fff;}
+    .metric .note{margin-top:12px;color:var(--muted);font-size:12.5px;line-height:1.4;}
+    .chip{font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px;letter-spacing:0.5px;}
+    .up{color:#0a0a0a;background:var(--green);}
+    .flat{color:var(--gold-hi);background:#241f10;}
+
+    .main-chart{grid-column:span 8;}
+    .side-panel{grid-column:span 4;}
+    .section-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:16px;}
+    h2{margin:0;font-size:18px;font-weight:700;}
+    .subtle{color:var(--muted);font-size:12.5px;line-height:1.45;margin:4px 0 0;}
+    canvas{width:100%;height:300px;display:block;}
+
+    .funnel-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line2);}
+    .funnel-row:last-of-type{border-bottom:0;}
+    .funnel-row strong{display:block;font-size:14px;margin-bottom:3px;color:#fff;}
+    .funnel-row span{display:block;color:var(--muted);font-size:12px;}
+    .big-number{font-size:23px;font-weight:800;color:var(--gold-hi);font-family:var(--mono);}
+    .funnel-bar{height:6px;border-radius:999px;background:#1c1c1c;overflow:hidden;grid-column:1 / -1;margin-top:2px;}
+    .funnel-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-hi));border-radius:inherit;}
+
+    .callout{margin-top:16px;border:1px solid var(--gold-dim);background:#0d0c08;color:var(--gold-hi);border-radius:10px;padding:13px 15px;font-size:12.5px;line-height:1.5;}
+
+    .platforms{grid-column:span 7;}
+    .clicks{grid-column:span 5;}
+    table{width:100%;border-collapse:collapse;font-size:13.5px;}
+    th{text-align:left;color:var(--gold);font-family:var(--mono);font-size:10px;letter-spacing:1.2px;text-transform:uppercase;padding:0 10px 12px 0;border-bottom:1px solid var(--line);}
+    td{padding:13px 10px 13px 0;border-bottom:1px solid var(--line2);vertical-align:middle;}
+    tr:last-child td{border-bottom:0;}
+    .platform-name{display:flex;align-items:center;gap:10px;font-weight:700;color:#fff;}
+    .dot{width:10px;height:10px;border-radius:999px;flex:0 0 auto;}
+    .mono{font-family:var(--mono);color:var(--ink);}
+    .bar{width:100%;height:8px;border-radius:999px;background:#1c1c1c;overflow:hidden;}
+    .bar i{display:block;height:100%;width:var(--w);background:var(--c);border-radius:inherit;}
+
+    .demo-data{position:fixed;right:18px;bottom:18px;z-index:10;padding:9px 13px;border-radius:999px;background:#16130a;border:1px solid var(--gold-dim);color:var(--gold-hi);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1px;}
+
+    @media (max-width:980px){
+      header{flex-direction:column;align-items:flex-start;}
+      .period{width:100%;}
+      .metric,.main-chart,.side-panel,.platforms,.clicks{grid-column:1 / -1;}
+    }
+    @media (max-width:640px){
+      .shell{width:calc(100% - 24px);}
+      .grid{gap:12px;} .card{padding:16px;}
+      h1{font-size:28px;} table{font-size:12px;} canvas{height:240px;}
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topbar">
+      <div class="brand">Mixon <span>Grows</span><small>Author Growth Engine</small></div>
+      <div class="live"><i></i> System live &middot; tracking</div>
+    </div>
+
+    <header>
+      <div>
+        <div class="eyebrow">Prototype &middot; demo data</div>
+        <h1>Author Exposure Dashboard</h1>
+        <p class="lede">One command center for Terri's author brand: where the content posts, how much reach it earns, and which platforms drive clicks toward the book and the course ladder.</p>
+      </div>
+      <aside class="period" aria-label="Reporting period">
+        <strong>Reporting period</strong>
+        <span>First 90 days</span>
+        <p>Demo values for preview. Live data connects to platform exports, tagged links, and site analytics.</p>
+      </aside>
+    </header>
+
+    <section class="grid" aria-label="Dashboard metrics">
+      <article class="card metric">
+        <div class="label">Total reach <span class="chip up">+37%</span></div>
+        <div class="value">54.8k</div>
+        <p class="note">People reached across author IG, Facebook, Pinterest, Reels, TikTok, and YouTube Shorts.</p>
+      </article>
+      <article class="card metric">
+        <div class="label">Book clicks <span class="chip up">+22%</span></div>
+        <div class="value">1,284</div>
+        <p class="note">Tagged clicks from social posts to Terri's book landing path.</p>
+      </article>
+      <article class="card metric">
+        <div class="label">Course interest <span class="chip up">+18%</span></div>
+        <div class="value">214</div>
+        <p class="note">Demo signups or course-page actions generated from the content system.</p>
+      </article>
+      <article class="card metric">
+        <div class="label">Posts shipped <span class="chip flat">90 days</span></div>
+        <div class="value">312</div>
+        <p class="note">Static, motion, and short-form placements scheduled across the channel map.</p>
+      </article>
+
+      <article class="card main-chart">
+        <div class="section-head">
+          <div>
+            <h2>Total reach over time</h2>
+            <p class="subtle">Demo trend showing the compounding effect of consistent weekly posting.</p>
+          </div>
+        </div>
+        <canvas id="reachChart" width="960" height="360" aria-label="Reach over time chart"></canvas>
+      </article>
+
+      <article class="card side-panel">
+        <div class="section-head">
+          <div>
+            <h2>Book click path</h2>
+            <p class="subtle">Movement from exposure to book and course interest.</p>
+          </div>
+        </div>
+        <div class="funnel-row">
+          <div><strong>Content reach</strong><span>All social impressions and views</span></div>
+          <div class="big-number">54.8k</div>
+          <div class="funnel-bar"><i style="width:100%"></i></div>
+        </div>
+        <div class="funnel-row">
+          <div><strong>Profile and link actions</strong><span>Bio, captions, pins, post links</span></div>
+          <div class="big-number">3,940</div>
+          <div class="funnel-bar"><i style="width:52%"></i></div>
+        </div>
+        <div class="funnel-row">
+          <div><strong>Book clicks</strong><span>Clicks through to the book path</span></div>
+          <div class="big-number">1,284</div>
+          <div class="funnel-bar"><i style="width:28%"></i></div>
+        </div>
+        <div class="funnel-row">
+          <div><strong>Course interest</strong><span>Journal, program, or waitlist actions</span></div>
+          <div class="big-number">214</div>
+          <div class="funnel-bar"><i style="width:12%"></i></div>
+        </div>
+        <p class="callout">This dashboard measures exposure and movement, not book sales. It shows which content lanes deserve more attention.</p>
+      </article>
+
+      <article class="card platforms">
+        <div class="section-head">
+          <div>
+            <h2>Platform command center</h2>
+            <p class="subtle">Demo platform performance for the first 90-day author-brand sprint.</p>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Platform</th><th>Posts</th><th>Views</th><th>Book clicks</th><th>Share of reach</th></tr>
+          </thead>
+          <tbody id="platformRows"></tbody>
+        </table>
+      </article>
+
+      <article class="card clicks">
+        <div class="section-head">
+          <div>
+            <h2>Clicks by content lane</h2>
+            <p class="subtle">Which creative lane moves viewers toward the book and course.</p>
+          </div>
+        </div>
+        <canvas id="clickChart" width="580" height="300" aria-label="Clicks by content lane chart"></canvas>
+        <p class="callout">Talking clips are the next lane once Terri sends raw interview files. Quote cards run now from the transcript.</p>
+      </article>
+    </section>
+  </main>
+
+  <div class="demo-data">Prototype &middot; demo data</div>
+
+  <script>
+    const platformData = [
+      { name: "Pinterest", posts: 78, views: 12100, clicks: 356, color: "#e0778f" },
+      { name: "TikTok", posts: 39, views: 10200, clicks: 192, color: "#57c78a" },
+      { name: "Instagram feed", posts: 52, views: 9800, clicks: 248, color: "#5b9bd5" },
+      { name: "Instagram Reels", posts: 39, views: 8600, clicks: 178, color: "#b18cd9" },
+      { name: "YouTube Shorts", posts: 52, views: 7900, clicks: 168, color: "#d4af37" },
+      { name: "Facebook page", posts: 52, views: 6200, clicks: 142, color: "#2a9d8f" }
+    ];
+    const reachSeries = [1800, 2600, 3400, 4300, 5200, 6500, 7800, 9400, 11300, 13700, 16400, 19800, 23800];
+    const clickLanes = [
+      { name: "Quote cards", value: 486, color: "#d4af37" },
+      { name: "Motion quotes", value: 384, color: "#f0dc9a" },
+      { name: "Talking clips", value: 262, color: "#2a9d8f" },
+      { name: "Pinterest pins", value: 152, color: "#e0778f" }
+    ];
+    const fmt = n => new Intl.NumberFormat("en-US").format(n);
+
+    function drawLineChart(){
+      const c=document.getElementById("reachChart"),ctx=c.getContext("2d");
+      const w=c.width,h=c.height,pad=44;
+      const max=Math.max(...reachSeries)*1.12, stepX=(w-pad*2)/(reachSeries.length-1);
+      ctx.clearRect(0,0,w,h);
+      ctx.strokeStyle="#232323";ctx.lineWidth=1;ctx.font="12px "+"-apple-system,sans-serif";ctx.fillStyle="#9a978f";
+      for(let i=0;i<5;i++){const y=pad+((h-pad*2)/4)*i;ctx.beginPath();ctx.moveTo(pad,y);ctx.lineTo(w-pad,y);ctx.stroke();
+        ctx.fillText(fmt(Math.round(max-(max/4)*i)),6,y+4);}
+      const pts=reachSeries.map((v,i)=>({x:pad+stepX*i,y:h-pad-(v/max)*(h-pad*2)}));
+      const g=ctx.createLinearGradient(0,pad,0,h-pad);
+      g.addColorStop(0,"rgba(212,175,55,0.30)");g.addColorStop(1,"rgba(212,175,55,0.02)");
+      ctx.beginPath();pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+      ctx.lineTo(w-pad,h-pad);ctx.lineTo(pad,h-pad);ctx.closePath();ctx.fillStyle=g;ctx.fill();
+      ctx.beginPath();pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+      ctx.strokeStyle="#d4af37";ctx.lineWidth=3.5;ctx.lineJoin="round";ctx.stroke();
+      pts.forEach((p,i)=>{ctx.beginPath();ctx.arc(p.x,p.y,i===pts.length-1?6:4,0,Math.PI*2);
+        ctx.fillStyle=i===pts.length-1?"#f0dc9a":"#141414";ctx.fill();ctx.strokeStyle="#d4af37";ctx.lineWidth=2.5;ctx.stroke();});
+      ctx.fillStyle="#9a978f";ctx.font="11px -apple-system,sans-serif";
+      for(let i=0;i<reachSeries.length;i+=2){ctx.fillText("W"+(i+1),pad+stepX*i-8,h-14);}
+    }
+
+    function drawClickChart(){
+      const c=document.getElementById("clickChart"),ctx=c.getContext("2d");
+      const w=c.width,h=c.height,max=Math.max(...clickLanes.map(l=>l.value));
+      ctx.clearRect(0,0,w,h);
+      clickLanes.forEach((lane,i)=>{
+        const y=30+i*62, barW=(lane.value/max)*(w-215);
+        ctx.fillStyle="#e8e6e1";ctx.font="14px -apple-system,sans-serif";ctx.fillText(lane.name,0,y+16);
+        ctx.fillStyle="#1c1c1c";ctx.roundRect(150,y,w-210,18,9);ctx.fill();
+        ctx.fillStyle=lane.color;ctx.roundRect(150,y,Math.max(barW,6),18,9);ctx.fill();
+        ctx.fillStyle="#f0dc9a";ctx.font="800 14px "+"-apple-system,sans-serif";ctx.fillText(fmt(lane.value),w-46,y+15);
+      });
+    }
+
+    function renderPlatformRows(){
+      const tv=platformData.reduce((s,i)=>s+i.views,0);
+      document.getElementById("platformRows").innerHTML=platformData.map(it=>{
+        const share=Math.round((it.views/tv)*100);
+        return `<tr>
+          <td><span class="platform-name"><i class="dot" style="background:${it.color}"></i>${it.name}</span></td>
+          <td class="mono">${fmt(it.posts)}</td>
+          <td class="mono">${fmt(it.views)}</td>
+          <td class="mono">${fmt(it.clicks)}</td>
+          <td><div class="bar" aria-label="${share}%"><i style="--w:${share}%;--c:${it.color}"></i></div></td>
+        </tr>`;}).join("");
+    }
+
+    CanvasRenderingContext2D.prototype.roundRect = CanvasRenderingContext2D.prototype.roundRect || function(x,y,width,height,radius){
+      this.beginPath();this.moveTo(x+radius,y);this.arcTo(x+width,y,x+width,y+height,radius);
+      this.arcTo(x+width,y+height,x,y+height,radius);this.arcTo(x,y+height,x,y,radius);
+      this.arcTo(x,y,x+width,y,radius);this.closePath();return this;};
+
+    renderPlatformRows();drawLineChart();drawClickChart();
+    window.addEventListener("resize",()=>{drawLineChart();drawClickChart();});
+  </script>
+</body>
+</html>

@@ -66,16 +66,20 @@
 
   <h2>The bootstrap prompt (copy and paste this into his Claude)</h2>
   <div class="promptlabel">Paste this as the first message after starting Claude in the kit folder</div>
-  <div class="prompt">You are my AI operator, and this folder is your operating system. Do this now:
+  <div class="prompt">You are my AI operator, and this folder is your operating system. Set me up completely and get me operating at a high level. Do all of this in order, and tell me what you are doing as you go:
 
-1. Read CLAUDE.md, docs/personas/operator.md, docs/personas/assistant.md, docs/operating-doctrine.md, docs/communication-protocol.md, and state/RULES.md so you understand who you are, how to behave, and how your memory works.
+1. READ THE SYSTEM. Read CLAUDE.md, docs/personas/operator.md, docs/personas/assistant.md, docs/operating-doctrine.md, docs/communication-protocol.md, state/RULES.md, and CONNECTORS.md so you understand who you are, how to behave, your memory, and the connectors.
 
-2. My operator profile is still the blank template, so run the onboarding interview from skills/onboard/SKILL.md. Interview me ONE question at a time about who I am, what I do, how I make money, what eats my time, how I want you to work, and what I keep control of. Recommend an answer when I am unsure. Do not assume anything about me.
+2. INSTALL THE SKILLS. Copy every folder inside this kit's skills/ directory into my global skills folder ~/.claude/skills/ (create it if it does not exist), so every one becomes a slash command I can use from anywhere. Then tell me which skills installed.
 
-3. When the interview is done, write my profile into docs/personas/operator.md, give yourself a name in docs/personas/assistant.md, and fill state/NOW.md with my current focus and first mission. Then give me a short recap and the single best first move.
+3. INTERVIEW ME, and go deep. Run the onboarding interview in skills/onboard/SKILL.md. Ask ONE question at a time, follow up when an answer opens something up, and dig hard on how I make money. Do not assume anything. Keep going until you truly understand me and my business, then write my profile into docs/personas/operator.md, name yourself in docs/personas/assistant.md, and fill state/NOW.md with my current focus and first mission.
 
-Start now with your first question.</div>
-  <div class="note">That one prompt is the whole thing. His AI reads the system, then builds itself around him through the interview.</div>
+4. SET UP MY CONNECTORS. Walk me through CONNECTORS.md one at a time (GitHub, Google, Supabase, Firecrawl, Higgsfield, Claude Design). For each: what it does, how to add it, and what account or key I need. Do the parts you can (like wiring Firecrawl once I give you my key). Clearly flag the parts only I can do (making accounts and signing in through the Connectors settings). Do not move on until I have added it or chosen to skip it for now.
+
+5. ORIENT ME. Give me a short recap of how to operate day to day: how to use /recall, /save, /brief, and the money-finding skills, and remind me you always get my approval before spending money, sending messages, or publishing. Then recommend my single best first move.
+
+Start now with step 1.</div>
+  <div class="note">This one prompt does the whole setup: installs the skills into his terminal, runs the deep-dive interview, walks him through every connector, and gets him operating at a high level.</div>
 
   <h2>The skills he's getting, and how each helps him</h2>
   <table>

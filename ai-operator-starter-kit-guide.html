@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Operator Starter Kit - Handoff Guide</title>
+<style>
+  :root{--bg:#0a0a0a;--card:#141414;--border:#262626;--gold:#d4af37;--gold-hi:#f0dc9a;--gold-dim:#8a7223;--text:#e8e6e1;--dim:#9a978f;--green:#57c78a;--mono:"SF Mono",ui-monospace,Menlo,monospace;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,"SF Pro Text","Helvetica Neue",sans-serif;line-height:1.7;padding:44px 22px 90px;}
+  .wrap{max-width:860px;margin:0 auto;}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;}
+  h1{font-size:31px;font-weight:800;margin:10px 0 6px;}
+  .meta{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:1px;margin-bottom:22px;}
+  .lead{font-size:16px;background:linear-gradient(135deg,#16130a,#141414);border:1px solid var(--gold-dim);border-radius:14px;padding:20px 24px;margin-bottom:14px;}
+  h2{font-family:var(--mono);font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:40px 0 14px;display:flex;align-items:center;gap:14px;}
+  h2::after{content:"";flex:1;height:1px;background:var(--border);}
+  p{font-size:15px;margin-bottom:12px;} .dim{color:var(--dim);} b{color:#fff;}
+  a{color:var(--gold-hi);}
+  ol.steps{counter-reset:s;list-style:none;} ol.steps li{padding:9px 0 9px 40px;position:relative;counter-increment:s;border-bottom:1px solid #1a1a1a;font-size:15px;}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:9px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#0a0a0a;font-weight:800;font-size:13px;display:grid;place-items:center;font-family:var(--mono);}
+  code{font-family:var(--mono);font-size:13px;background:#1c1c1c;border:1px solid var(--border);border-radius:5px;padding:2px 6px;color:var(--gold-hi);}
+  .prompt{background:#0f0f0f;border:1px solid var(--gold-dim);border-radius:12px;padding:18px 20px;margin:12px 0;font-family:var(--mono);font-size:12.5px;line-height:1.6;color:#d7e0d9;white-space:pre-wrap;overflow-x:auto;}
+  .promptlabel{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.8px;}
+  td,th{border-bottom:1px solid #1d1d1d;padding:11px 9px;text-align:left;vertical-align:top;}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
+  td b{color:#fff;} td:first-child{white-space:nowrap;color:var(--gold-hi);font-family:var(--mono);font-size:13px;}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;}
+  .col{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+  .col h4{font-size:14px;margin-bottom:8px;} .col.in h4{color:var(--green);} .col.out h4{color:var(--dim);}
+  .col ul{list-style:none;} .col ul li{font-size:13px;padding:4px 0 4px 16px;position:relative;color:var(--dim);}
+  .col.in ul li::before{content:"\2713";color:var(--green);position:absolute;left:0;}
+  .col.out ul li::before{content:"\2013";color:var(--dim);position:absolute;left:0;}
+  @media(max-width:640px){.two{grid-template-columns:1fr;}}
+  .note{background:#0d0c08;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:14px;color:var(--gold-hi);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Mixon Grows &middot; Handoff</div>
+  <h1>AI Operator Starter Kit: Handoff Guide</h1>
+  <div class="meta">what your friend gets, how to transfer it, and the prompt to make his AI build itself</div>
+
+  <div class="lead">
+    This is a clean, <b>Claude-only</b> copy of the operating system, the behaviors and skills, with none of your data. Your friend clones it, runs one prompt, and his AI interviews him and builds the whole system around how he works and how he makes money. Base Claude, your settings, nothing else.
+  </div>
+
+  <h2>What he's getting</h2>
+  <p>The repo: <a href="https://github.com/malikmixon9/ai-operator-starter-kit">github.com/malikmixon9/ai-operator-starter-kit</a></p>
+  <ul style="list-style:none">
+    <li style="padding:5px 0 5px 20px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">&#9656;</span> <b>The behaviors</b>, outcomes not answers, proof before done, his final say on money/messages/publishing, plain English, honesty over agreeableness.</li>
+    <li style="padding:5px 0 5px 20px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">&#9656;</span> <b>The memory system</b>, the two-file mission board that makes resume instant.</li>
+    <li style="padding:5px 0 5px 20px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">&#9656;</span> <b>16 skills</b>, the reusable ones you run every day (below).</li>
+    <li style="padding:5px 0 5px 20px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">&#9656;</span> <b>The onboarding interview</b> that sets it all up around him.</li>
+  </ul>
+
+  <h2>How to transfer it (send him this)</h2>
+  <ol class="steps">
+    <li>Make a free <b>Claude account</b> (claude.ai, Pro plan) and a free <b>GitHub account</b>.</li>
+    <li>Install <b>Claude Code</b>: <code>npm install -g @anthropic-ai/claude-code</code> (install Node first from nodejs.org if needed).</li>
+    <li>Get the kit: clone <code>https://github.com/malikmixon9/ai-operator-starter-kit.git</code> to his computer.</li>
+    <li>Open a terminal in that folder and run <code>claude</code>.</li>
+    <li>Paste the bootstrap prompt below. His AI reads the system and interviews him to build it around him.</li>
+  </ol>
+
+  <h2>The bootstrap prompt (copy and paste this into his Claude)</h2>
+  <div class="promptlabel">Paste this as the first message after starting Claude in the kit folder</div>
+  <div class="prompt">You are my AI operator, and this folder is your operating system. Do this now:
+
+1. Read CLAUDE.md, docs/personas/operator.md, docs/personas/assistant.md, docs/operating-doctrine.md, docs/communication-protocol.md, and state/RULES.md so you understand who you are, how to behave, and how your memory works.
+
+2. My operator profile is still the blank template, so run the onboarding interview from skills/onboard/SKILL.md. Interview me ONE question at a time about who I am, what I do, how I make money, what eats my time, how I want you to work, and what I keep control of. Recommend an answer when I am unsure. Do not assume anything about me.
+
+3. When the interview is done, write my profile into docs/personas/operator.md, give yourself a name in docs/personas/assistant.md, and fill state/NOW.md with my current focus and first mission. Then give me a short recap and the single best first move.
+
+Start now with your first question.</div>
+  <div class="note">That one prompt is the whole thing. His AI reads the system, then builds itself around him through the interview.</div>
+
+  <h2>The skills he's getting, and how each helps him</h2>
+  <table>
+    <tr><th>Skill</th><th>What it does</th><th>How it helps him work</th></tr>
+    <tr><td>/onboard</td><td>Interviews him to set up his profile and system</td><td>Turns a blank kit into his own operator in one sitting</td></tr>
+    <tr><td>/recall</td><td>Loads the mission board and resumes</td><td>Picks up exactly where he left off, no re-explaining</td></tr>
+    <tr><td>/save</td><td>Writes state and backs up to GitHub</td><td>Never loses work; next session is instant</td></tr>
+    <tr><td>/brief</td><td>Short daily read on what matters</td><td>Knows the one thing to focus on today</td></tr>
+    <tr><td>/do-it-for-me</td><td>Runs a task end to end, then reports</td><td>Hands off whole tasks and gets them finished</td></tr>
+    <tr><td>/explain</td><td>Plain-English explainer of anything</td><td>Learns fast, or makes explainers for clients</td></tr>
+    <tr><td>/handoff</td><td>Packages work into one copyable brief</td><td>Passes work to a person or another AI cleanly</td></tr>
+    <tr><td>/proof-gate</td><td>Blocks a done claim without evidence</td><td>Keeps the system honest, nothing fake-finished</td></tr>
+    <tr><td>/doublecheck</td><td>Review pass before surfacing work</td><td>Catches misses before he relies on them</td></tr>
+    <tr><td>/roast</td><td>Stress-tests an idea, offer, or page</td><td>Kills bad ideas early, sharpens good ones</td></tr>
+    <tr><td>/leads</td><td>Finds real local businesses to pitch</td><td>A real prospect list to work, not a guess</td></tr>
+    <tr><td>/analysis</td><td>Researches a target and builds the approach</td><td>Walks into any call with a gameplan</td></tr>
+    <tr><td>/deep-dive</td><td>Audits what a client already owns</td><td>Never pitches something they already have</td></tr>
+    <tr><td>/audit</td><td>Growth audit of a website</td><td>A client-ready report that wins the deal</td></tr>
+    <tr><td>/deep-research</td><td>Multi-source verified research</td><td>Real answers on hard questions, with proof</td></tr>
+    <tr><td>/skill-miner</td><td>Turns his repeated work into new skills</td><td>The system grows to fit him over time</td></tr>
+  </table>
+
+  <h2>What's in vs left out (on purpose)</h2>
+  <div class="two">
+    <div class="col in">
+      <h4>Included</h4>
+      <ul>
+        <li>Every reusable behavior and skill</li>
+        <li>The memory and persona system</li>
+        <li>The onboarding interview</li>
+        <li>Base-Claude only, your settings</li>
+      </ul>
+    </div>
+    <div class="col out">
+      <h4>Left out (and why)</h4>
+      <ul>
+        <li>Codex / Kamina pieces (he is Claude only)</li>
+        <li>Your dashboard, Trill Mats, SilverShore skills (tied to your business)</li>
+        <li>Your data, clients, memory, keys (his stays his)</li>
+        <li>He grows his own with /skill-miner and /onboard</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="meta" style="margin-top:34px">Clean slate, Claude only. He gets the engine and the behaviors; the interview makes it his.</div>
+</div>
+</body>
+</html>
